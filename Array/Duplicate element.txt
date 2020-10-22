@@ -97,3 +97,15 @@ public:
     }
 };
 
+---------------------------------------------------------------------
+
+
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& a) 
+    {
+        sort(a.begin(), a.end());        
+        return (std::unique( a.begin(), a.end() ) != a.end());
+    }
+};

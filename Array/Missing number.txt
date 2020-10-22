@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& v) 
+    {
+        
+        int n=v.size(),i=0;
+        for(int x=1; x<=n; x++) i+=x;
+        return i-accumulate(v.begin(), v.end(), 0);
+    }
+};
+--------------------------------------------------------------------------
+
+class Solution {
+public:
+    int missingNumber(vector<int>& v) 
+    {
+        int n=v.size(),i=(n*(n+1))/2;
+        return i-accumulate(v.begin(), v.end(), 0);
+    }
+};
+--------------------------------------------------------------------------
+class Solution {
+public:
+    int missingNumber(vector<int>& v) 
+    {
+        int n=v.size(),i=(n*(n+1))/2;
+	int sum=accumulate(v.begin(), v.end(), 0);
+        return i-sum;
+    }
+};
+
+-----------------------------------------------------------------------
+
+#include <iostream>
+#include <vector>
+#include <set> 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int missingNumber(vector<int>& v) 
+    {
+        
+        int n=v.size(),i=0;
+        for(int x=1; x<=n; x++) i+=x;
+        return i-accumulate(v.begin(), v.end(), 0);
+    }
+};
+
+int main()
+{
+   vector<int> v = {1,0,3}; 
+   Solution s;
+   cout<<s.missingNumber(v);
+   return 0;
+}
+
+
+--------------------------------------------------------------------------
