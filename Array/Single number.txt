@@ -1,0 +1,29 @@
+#include <iostream> 
+#include <set> 
+#include <vector> 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    Solution(){
+        ios_base::sync_with_stdio(0);
+        cin.tie(0);
+    }
+    int singleNumber(vector<int>& v) 
+    {
+        int ip=0;
+        for(int i : v)  ip ^=i;
+        return ip;
+    }
+};
+
+int main()
+{
+   Solution s;
+   vector<int> v = {1,0,1};
+   cout<<s.singleNumber(v);
+   return 0;
+}
+
+==========================================================================
