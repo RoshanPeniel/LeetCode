@@ -1,0 +1,93 @@
+#include <iostream> 
+#include <set> 
+#include <vector> 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& v) 
+    {
+        int n=v.size(),x=0;
+        vector<int> dp(n),ans;
+        sort(v.begin(),v.end());
+        for(int i:v)
+        {
+            if(i==x)
+            {
+                ans.push_back(i);
+            }
+            x=i;
+        }
+        return ans;
+        
+    }
+};
+
+int main()
+{
+   Solution s;
+   vector<int> v = {4,3,2,7,8,2,3,1};
+   
+   vector<int> a = s.findDuplicates(v);
+   
+   for(int i=0; i < a.size(); i++)
+   std::cout << a.at(i) << ' ';
+   
+   
+   return 0;
+}
+
+========================================================================
+best max:
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums)
+    {
+        ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+        int n=nums.size();
+        int cnt=0;
+        for(int i=0;i<n;i++)
+        {
+            int x=nums[i]&0x3fffffff;
+            if(nums[x-1]>0)
+            {
+                nums[x-1]|=0x80000000;
+            }
+            else
+            {
+                nums[x-1]|=0x40000000;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            int x=nums[i]&0xc0000000;
+            if(x==0xc0000000)
+                nums[cnt++]=i+1;
+        }
+        nums.resize(cnt);
+        return move(nums);
+        
+    }
+};
+
+========================================================================
+ok:
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) 
+    {
+        vector<int> res;
+        int n = nums.size();
+        for (int i = 0; i < n; i ++){
+            int j = abs(nums[i]) - 1;
+            if (nums[j] > 0) nums[j] *= -1;
+            else res.push_back(j+1);
+        }
+
+        return res;
+    }
+};
+
