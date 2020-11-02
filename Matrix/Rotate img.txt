@@ -1,0 +1,49 @@
+BEST:
+
+class Solution {
+public:
+    void rotate(vector<vector<int>>& m) 
+    {
+        int n=m.size();
+            
+        for(int i=0; i<(n+1)/2;i++)
+        {
+            for(int j=0; j<n/2; j++)
+            {
+                int tmp=m[n-1-j][i];
+                m[n-1-j][i] = m[n-1-i][n-j-1];
+                m[n-1-i][n-j-1] = m[j][n-1-i];
+                m[j][n-1-i] = m[i][j];
+                m[i][j] = tmp;
+            }
+        }
+    }
+};
+====================================================================
+class Solution {
+public:
+    void rotate(vector<vector<int>>& m) 
+    {
+        int n=m.size();
+            
+        for(int i=0; i<n; i++)
+        {
+            for(int j=i; j<n; j++)
+            {
+                int tmp = m[j][i];
+                m[j][i] = m[i][j];
+                m[i][j]=tmp;
+            }
+        }
+        
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<n/2; j++)
+            {
+                int tmp=m[i][j];
+                m[i][j] = m[i][n-j-1];
+                m[i][n-j-1] =tmp;
+            }
+        }
+    }
+};
