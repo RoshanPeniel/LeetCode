@@ -1,0 +1,80 @@
+works but not best:
+
+class Solution {
+public:
+    int majorityElement(vector<int>& v) 
+    {
+        int n=v.size(),x=0,y=0,z;
+        sort(v.begin() ,v.end());
+        int j=v[0];
+        for(int i:v)
+        {
+            if(j==i)
+            {
+                x++;
+                if(i==v[n-1]) if(x>y) z=j;
+            }
+            else
+            {
+                if(x>y)
+                {
+                    y=x;
+                    z=j;
+                }
+                j=i;
+                x=1;
+            }
+        }
+        return z;
+    }
+};
+
+========================================================================
+
+best:
+
+class Solution {
+public:
+    int majorityElement(vector<int>& v) 
+    {
+        int c=0,e;
+        int n=v.size();
+        for(int i:v)
+        {
+            if(c==0)    e = i;
+            if (e==i)    c++;
+            else    c--;
+        }
+        return e;
+    }
+};
+
+==========================================================================
+same:
+
+class Solution {
+public:
+    int majorityElement(vector<int>& v) 
+    {
+        int c=0,e;
+        int n=v.size();
+        for(int i:v)
+        {
+            if(c==0)    e = i;
+            c += (i==e) ? 1 : -1;
+        }
+        return e;
+    }
+};
+
+==========================================================================
+works but more time:
+
+class Solution {
+public:
+    int majorityElement(vector<int>& v) 
+    {
+        sort(v.begin(),v.end());
+        return v[v.size()/2];
+    }
+};
