@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int search(vector<int>& v, int t) 
+    {
+        int u=v.size(), l=0 ,m;
+        while(u>=l)
+        {
+            m= l+(u-l)/2;
+            if(t==v[m])  return m;            
+            else if(t > v[m])  l = m+ 1;
+            else  u = m-1;
+        }
+        return -1;
+    }
+};
+=========================================================================
+faster:
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        for (int left=0, right=nums.size(); left < right; ) {
+            int mid = (left+right)/2;
+            if (nums[mid]==target) return mid;
+            else if (nums[mid] < target) left = mid+1;
+            else right = mid;
+        }
+        return -1;
+    }
+};
+
+=========================================================================
+
