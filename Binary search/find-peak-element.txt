@@ -1,0 +1,38 @@
+Linear :
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& v) 
+    {
+        int n=v.size();
+        for(int i=0; i<n-1; i++)
+        {
+            if(v[i]>v[i+1])
+            {
+                return i;
+            }
+        }
+        return n-1;
+    }
+};
+
+====================================================================
+
+bin sch:
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& v) 
+    {
+        int r=v.size()-1,l=0;
+        while(l<r)
+        {
+            int mid=(l+r)/2;
+            if(v[mid] > v[mid+1])
+                r=mid;
+            else
+                l=mid+1;
+        }
+        return l;
+    }
+};
