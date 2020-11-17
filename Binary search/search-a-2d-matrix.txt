@@ -1,0 +1,81 @@
+Linear:
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& m, int t) 
+    {
+        if(m.size()==0) return false;
+        int r=m.size(),c=m[0].size();
+        for(int i=0;i<r; i++)
+        {
+            for(int j=0; j<c; j++)
+            {
+                if(t==m[i][j]) return true;
+            }
+        }
+        return false;
+    }
+};
+
+=================================================================
+
+Bin sch:
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& mat, int t) {
+        int r=0;
+        int i=0,j=mat.size()-1;
+        if(j==-1)return 0;
+        int k=mat[0].size()-1;
+        if(k==-1)return 0;
+        while(i<=j){
+            int m=i+(j-i)/2;
+            if(mat[m][0]<=t && mat[m][k]>=t){
+                r=m;break;
+            }
+            else if(mat[m][0]<t){
+                i=m+1;
+            }
+            else
+                j=m-1;
+        }
+        i=0;
+        while(i<=k){
+            int m=i+(k-i)/2;
+            if(mat[r][m]==t)
+                return true;
+            if(mat[r][m]>t){
+                k=m-1;
+            }
+            else
+                i=m+1;
+        }
+        return 0;
+    }
+};
+=========================================================================
+
+another:
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& mat, int t) {
+        int r = mat.size(); if(r==0)return false;
+        int c = mat[0].size();if(c==0)return false;
+        
+        int b=0,e=(r*c-1),m,i,j;
+        
+        while(b<e){
+            
+            m = b+(e-b)/2;
+            i = m/c , j = m%c;
+            if(t>mat[i][j])
+                b = m+1;
+            else e = m;
+        }
+        i=b/c;j=b%c;
+        
+        return (mat[i][j]==t)?true:false;
+    }
+};
