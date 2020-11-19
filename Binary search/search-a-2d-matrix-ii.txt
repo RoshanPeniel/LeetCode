@@ -1,0 +1,68 @@
+bin sch:
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& m, int t) 
+    {
+        int r=m.size();
+        if(m.empty())
+        {
+            return false;
+        }
+        int i=0,j=m[0].size()-1;
+        
+        while(i < r && j >= 0)
+        {
+            if(m[i][j]<t)
+            {
+                i++;
+            }
+            else if(m[i][j] > t)
+            {
+                j--;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+========================================================================
+faster:
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& m, int t) {
+        std::ios::sync_with_stdio(0);
+        if (m.size() == 1 && m[0].size() == 0) {
+            return false;
+        }
+        while (m.size() != 0) {
+            int x = m[0][m[0].size()-1];
+            if (x == t) 
+            {
+                return true;
+            } 
+            else if (x > t) 
+            {
+                for (int i = 0; i < m.size(); i++) 
+                {
+                    m[i].pop_back();
+                    if (m[i].size() == 0) 
+                    {
+                        m.erase(m.begin()+i);
+                    }
+                }
+            } 
+            else 
+            {
+                m.erase(m.begin());
+            }
+        }
+        return false;  
+    }
+    
+};
