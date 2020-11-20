@@ -1,0 +1,52 @@
+bin sch:(faster)
+
+static int speedupplease=[](){ios_base::sync_with_stdio(0),cin.tie(0),cout.tie(0);return 0;}();
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& a, int k, int x) {
+        int l = 0, r = a.size() - k;
+        while (l < r) 
+        {
+            int m = (l + r) / 2;
+            if (x - a[m] > a[m + k] - x)
+                l = m + 1;
+            else
+                r = m;
+        }
+        return vector<int>(a.begin() + l, a.begin() + l + k);
+    }
+};
+
+
+========================================================================
+also works:
+
+class Solution
+{
+  public:
+    std::vector<int> findClosestElements(std::vector<int>& arr, int k, int x)
+    {
+      int low = 0;
+      int high = arr.size() - k;
+      while (low < high)
+      {
+        int mid = low + (high - low) / 2;
+        if (x - arr[mid] > arr[mid + k] - x) low = mid + 1;
+        else high = mid;
+      }
+      return std::vector<int>(arr.begin() + low, arr.begin() + low + k);
+    }
+};
+==========================================================================
+slower:
+
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        int index = std::lower_bound(arr.begin(), arr.end(), x) - arr.begin();
+        int i = index - 1, j = index;                                    
+        while(k--) (i<0 || (j<arr.size() && abs(arr[i] - x) > abs(arr[j] - x) ))? j++: i--;
+        cout << j << " " << i << "\n";
+        return vector<int>(arr.begin() + i + 1, arr.begin() + j );
+    }
+};
