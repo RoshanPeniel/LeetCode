@@ -1,0 +1,47 @@
+works:
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& n1, vector<int>& n2) 
+    {
+        for(int i:n2)
+            n1.push_back(i);
+        sort(n1.begin(),n1.end());
+        int n=n1.size();
+        double x;
+        if(n%2==1)
+        {
+            x=n1[n/2];
+        }
+        else
+        {
+            double a=n1[n/2], b=n1[n/2-1];
+            x=(a+b)/2;
+        }
+        return x;
+    }
+};
+=========================================================================
+better:
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& n1, vector<int>& n2) {
+        int s1 = n1.size();
+        int s2 = n2.size();
+        bool odd = ((s1 + s2) % 2);
+        int midpos = (s1 + s2) / 2;
+        int c1 = 0 , c2 = 0;
+        int v1 = 0, v2 = 0;
+        int prev_val, val = -1;
+        while (true) {
+            v1 = (c1 < s1) ? n1[c1] : 99999999;
+            v2 = (c2 < s2) ? n2[c2] : 99999999;
+            prev_val = val;
+            val = (v1 > v2) ? v2 : v1;
+            if (c1 + c2 == midpos) break;
+            (v1 > v2) ? ++c2 : ++c1;
+        };
+        return odd ? val : (val + prev_val) / 2.0;
+    }
+};
