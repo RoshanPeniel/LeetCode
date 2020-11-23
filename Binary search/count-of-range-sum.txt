@@ -1,0 +1,23 @@
+works:
+
+class Solution {
+public:
+	int countRangeSum(vector<int>& v, int l, int u) {
+		multiset<long> mySet = {0};
+
+		int r = 0;
+		long c = 0;
+
+		for (int i = 0; i < v.size(); ++i) 
+        {
+			c += v[i];
+			r += distance(mySet.lower_bound(c-u),mySet.upper_bound(c-l));
+			mySet.insert(c);
+		}
+
+		return r;
+	}
+};
+
+========================================================================
+
