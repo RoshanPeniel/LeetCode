@@ -1,0 +1,51 @@
+works but slow:
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& v) 
+    {
+        int n=v.size();
+        for(int i=0; i<n; i++)
+        {
+            v[i]=v[i]*v[i];
+        }
+        sort(v.begin(),v.end());
+        return v;
+        
+    }
+};
+
+========================================================================
+2 pointers: (best)
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& v) 
+    {
+        ios_base :: sync_with_stdio(false);
+        cin.tie(0);
+        vector<int> a = v;
+        int i=0;
+        int j=v.size()-1;
+        int n = j;
+        while(i<=j)
+        {
+            a[n] = abs(v[i]) > abs(v[j]) ? v[i] * v[i++] : v[j] * v[j--];
+            n--;
+        }
+        return a;
+    }
+};
+
+=======================================================================
+
+condition:
+
+if(abs(A[i]) > abs(A[j]))
+            {
+                ans[n]=A[i] * A[i++];
+            }
+            else
+            {
+                ans[n]=A[j] * A[j--];
+            }
