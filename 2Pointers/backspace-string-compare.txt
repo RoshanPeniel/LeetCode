@@ -1,0 +1,75 @@
+Works but slow:
+
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) 
+    {
+        vector<char> a1,a2;        
+        for(char i:S)
+        {
+            if(i=='#' && a1.empty()==false)            
+                a1.pop_back();
+            else if(i!='#')
+                a1.push_back(i);
+        }
+        for(char i:T)
+        {
+            if(i=='#' && a2.empty()==false)            
+                a2.pop_back();
+            else if(i!='#')
+                a2.push_back(i);
+        }
+        if(a1==a2)  return true;
+        return false;
+    }
+};
+
+==========================================================
+faster:
+
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+        
+        int i=S.size()-1;
+        int j=T.size()-1;
+ 
+        while(i>=0 or j>=0)
+        {
+        int count_i=0;
+        int count_j=0;
+             
+         while(i>=0 && (S[i]=='#' or count_i>0) )
+          {
+            if(S[i]=='#')
+                count_i++;
+             else
+                 count_i--;
+             i--;
+         }
+        while(j>=0 && (T[j]=='#' or count_j>0 ))
+          {
+            if(T[j]=='#')
+                count_j++;
+             else
+                 count_j--;
+             j--;
+         }
+            if(i<0 && j<0)
+                return true;
+            else if((i>=0 && j<0) or (i<0 && j>=0))
+                return false;
+            else if(i>=0 && j>=0)
+            {
+         
+                if(S[i]!=T[j])
+                    return false;
+                i--;
+                j--;
+            }            
+        }
+        return true;
+        
+        
+    }
+};
