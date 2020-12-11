@@ -1,0 +1,54 @@
+best:
+
+class Solution {
+public:
+    int maxProfit(vector<int>& v) {
+        int min = INT_MAX, max = 0;
+        
+        for (int p : v){
+            if (p < min)
+                min = p;
+            else{
+                if (p - min > max)
+                    max = p - min;
+            }
+        }
+        return max;
+        
+    }
+};
+
+======================================================================
+works:
+
+class Solution {
+public:
+    int maxProfit(vector<int>& v) {
+        int pro = 0, maxm = 0;
+        for(int i = 1; i < v.size(); i++) {
+            pro = max(0, pro + v[i] - v[i - 1]);
+            maxm = max(maxm, pro);
+        }
+        return maxm;
+    }
+};
+==========================================================================
+
+brute force:
+
+class Solution {
+public:
+    int maxProfit(vector<int>& v) {
+        int n=v.size();
+        if(n==0)
+            return 0;
+    
+        vector<int> maxm(n);
+        maxm[n-1] = v[n-1];
+        for(int i=n-2; i>=0; i--)
+            maxm[i] = max(maxm[i+1], v[i]);
+        for(int i=0;i<n;i++)
+            maxm[i]-=v[i];
+        return *max_element(maxm.begin(),maxm.end());
+    }
+};
