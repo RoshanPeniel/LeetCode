@@ -1,0 +1,51 @@
+best:
+
+class NumArray {
+public:
+    NumArray(vector<int>& n) : p(size(n)+1, 0)
+    {    
+        partial_sum(begin(n), end(n), next(begin(p)));
+    }
+    
+    int sumRange(int i, int j) 
+    {
+        return p[j+1]-p[i];    
+    }
+    
+    vector<int> p;
+};
+
+=======================================================================
+
+works:
+
+class NumArray {
+public:
+    vector<int> P;
+    NumArray(vector<int>& nums) {
+        P.resize(nums.size()+1, 0);
+        for (int i=0; i<nums.size(); i++){
+            P[i+1] = nums[i] + P[i];
+        }
+    }
+    
+    int sumRange(int i, int j) {
+        return P[j+1]-P[i];
+    }
+};
+=======================================================================
+slow:
+
+class NumArray {
+public:
+    NumArray(vector<int>& n) : n(n)
+    {    
+    }
+    
+    int sumRange(int i, int j) 
+    {
+        return accumulate(begin(n)+i, next(begin(n)+j), 0);    
+    }
+    
+    const vector<int> & n;
+};
